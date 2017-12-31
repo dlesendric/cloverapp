@@ -70,21 +70,7 @@ class AppTestCase extends WebTestCase
         $purger = new ORMPurger($this->getService('doctrine')->getManager());
         $purger->purge();
     }
-
-    /**
-     * Creates some user and returns his token
-     *
-     * @param $email
-     * @return string
-     */
-    protected function getTokenForTestUser($email)
-    {
-
-        $token = $this->getService('lexik_jwt_authentication.encoder')
-            ->encode(['email' => $email]);
-
-        return $token;
-    }
+	
 
 
     public static function generateRandomString($length = 10)
