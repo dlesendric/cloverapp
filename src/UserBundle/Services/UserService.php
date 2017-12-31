@@ -93,5 +93,12 @@ class UserService extends BaseService implements IServicePagination
 	}
 
 
+	public function createUser()
+	{
+		$user  = new User();
+		return $user;
+	}
+
+
 
 }

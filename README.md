@@ -1,7 +1,7 @@
 Symfony Standard Edition + Default common Entities
 ========================
 **This app is good starting point for any standard 3.4 symfony app**
-**It does not include any third party libraries, but use most from Symfony Standarad Edition, but it does have some common solutions exp Soft Delete**
+**It does not include any third party libraries, but use most from Symfony Standarad Edition, and it does have some common solutions exp Soft Delete**
 
 Entities included
 
