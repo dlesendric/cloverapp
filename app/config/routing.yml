@@ -1,0 +1,9 @@
+client:
+    resource: "@ClientBundle/Resources/config/routing.yml"
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation

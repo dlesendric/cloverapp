@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% block title %}Login to APP{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="text-center"><b>Register</b></div>
+                </div>
+                <div class="panel-body">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <a href="{{ path('login') }}">Login</a>
+                    <input type="submit" class="btn btn-primary pull-right" value="Register" />
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

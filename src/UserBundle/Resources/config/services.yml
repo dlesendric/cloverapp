@@ -1,0 +1,30 @@
+services:
+    # repo
+    user_bundle.repository.user_repository:
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        class: UserBundle\Repository\UserRepository
+        arguments:
+          - UserBundle\Entity\User
+
+    # service
+    user_service:
+        class: UserBundle\Services\UserService
+        calls:
+            - [setRepository, ['@user_bundle.repository.user_repository']]
+            - [setContainer, ['@service_container']]
+        arguments: ['@Doctrine\ORM\EntityManagerInterface']
+        public: true
+
+    # controller
+    UserBundle\Controller\FrontendUserController:
+        arguments: ['@user_service']
+        calls:
+            - [setContainer, ['@service_container']]
+        public: true
+
+
+    UserBundle\Controller\AdminUserController:
+        arguments: ['@user_service']
+        calls:
+            - [setContainer, ['@service_container']]
+        public: true

@@ -1,0 +1,30 @@
+services:
+    # repo
+    client_bundle.repository.client_repository:
+        factory: ["@doctrine.orm.entity_manager", getRepository]
+        class: ClientBundle\Repository\ClientRepository
+        arguments:
+          - ClientBundle\Entity\Client
+
+    # service
+    client_service:
+        class: ClientBundle\Services\ClientService
+        calls:
+            - [setRepository, ['@client_bundle.repository.client_repository']]
+            - [setContainer, ['@service_container']]
+        arguments: ['@Doctrine\ORM\EntityManagerInterface']
+        public: true
+
+    # controller
+    ClientBundle\Controller\FrontendClientController:
+        arguments: ['@client_service']
+        calls:
+            - [setContainer, ['@service_container']]
+        public: true
+
+
+    ClientBundle\Controller\AdminClientController:
+        arguments: ['@client_service']
+        calls:
+            - [setContainer, ['@service_container']]
+        public: true

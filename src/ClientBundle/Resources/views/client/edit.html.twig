@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block title %}Edit client{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="text-center"><b>Client edit</b></div>
+                </div>
+                <div class="panel-body">
+                    <div class="pull-right">
+                        {{ form_start(delete_form) }}
+                        <button type="submit" value="Delete" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        {{ form_end(delete_form) }}
+                    </div>
+                    <div class="clearfix"></div>
+                    {{ form_start(edit_form) }}
+                    {{ form_widget(edit_form) }}
+                    <a href="{{ path('client_index') }}" class="btn btn-default">Back to list</a>
+                    <input type="submit" class="btn btn-primary pull-right" value="Edit" />
+                    {{ form_end(edit_form) }}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+      (function($){
+
+        $('.selectpicker').selectpicker({
+          style: 'btn-default',
+          size: 6
+        });
+
+      })(jQuery)
+
+    </script>
+{% endblock %}

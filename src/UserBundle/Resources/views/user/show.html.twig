@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="text-center"><b>User {{ user.username }}</b></div>
+                </div>
+                <div class="pull-right">
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> </button>
+                    {{ form_end(delete_form) }}
+                </div>
+
+                <p><b>Id:</b> {{ user.id }}</p>
+                <p><b>First name:</b> {{ user.firstName }}</p>
+                <p><b>Last name:</b> {{ user.lastName }}</p>
+                <p><b>Username:</b> {{ user.username }}</p>
+                <p><b>Roles:</b> {{ user.roles|join(' | ') }}</p>
+                <p><b>Enabled:</b>{% if user.enabled %} Yes {% else %} No {% endif %}</p>
+                <a href="{{ path('user_index') }}" class="btn bnt-default">Back to the list</a>
+                <a href="{{ path('user_edit', { 'id': user.id }) }}" class="btn btn-primary pull-right">Edit</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

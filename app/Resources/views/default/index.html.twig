@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}Clover app symfony 3.4{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div id="welcome">
+                        <h1 class="text-center"><span>Welcome to</span> Symfony {{ constant('Symfony\\Component\\HttpKernel\\Kernel::VERSION') }}</h1>
+                    </div>
+                    <svg id="icon-status" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z" fill="#759E1A"/></svg>
+
+                    Your application is now ready. You can start working on it at:
+                    <code>{{ base_dir }}</code>
+                </div>
+                <div class="col-lg-4">
+                    <h2>Description of this app</h2>
+                    <p>This app is good .dev starting point for symfony 3.4 app.</p>
+                    <p>It does not include anything from FOS, JWT, Api platform, and KnpLabs.</p>
+                    <p>It have included several most common entities cases like User, Client, Contact.</p>
+                    <p>Functionality of most entities and controllers are basic with some advanced symfony practices.</p>
+                    <p class="text-muted">If you like BaseService class , use it. It have some advantages...</p>
+                    <p>You can <a href="{{ path('register') }}">Register</a> your account.</p>
+                    <p>If you need some special role exp ROLE_ADMIN, you can type command: <code>$ php bin/console user:promote</code></p>
+                </div>
+                <div class="col-lg-4">
+                    <h2>JS Libs and CSS</h2>
+                    <p>This project includes libs like bootstrap 3.7 , font-awesome , bootstrap-select, jQuery. By default all stuff are cdn links.</p>
+                    <p>Please have in mind to remove them from base.html.twig if you plan to use something different.</p>
+                    <h3>Other functionality</h3>
+                    <p>Example of <b>Soft delete</b> without @Gedmo can be found in ClientBundle</p>
+                    <p>PHP Unit is included and have you can run test by typing <code>$ vendor/bin/phpunit</code></p>
+                </div>
+            </div>
+            <div class="footer text-center">
+                <h4>About me</h4>
+                <p>Darko Lesendric PHP Developer <a href="http://s7designcreative.com/">@S7Design</a> <a href="https://github.com/dlesendric"><i class="fa fa-github"></i></a> </p>
+            </div>
+    </div>
+{% endblock %}
+

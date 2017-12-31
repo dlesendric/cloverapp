@@ -1,0 +1,28 @@
+services:
+    before_request_listener:
+        class: AppBundle\EventListener\BeforeRequestListener
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@annotation_reader"
+        tags:
+            -
+                name: kernel.event_listener
+                event: kernel.request
+                method: onKernelRequest
+
+    controller_filter_deleted_listener:
+        class: AppBundle\EventListener\ControllerFilterDeletedListener
+        tags:
+            -
+                name: kernel.event_listener
+                event: kernel.controller
+                method: onKernelController
+        arguments:
+            - "@annotation_reader"
+            - "@doctrine.orm.entity_manager"
+
+
+    AppBundle\Controller\BaseController:
+        arguments: ['@user_service']
+        calls:
+            - [setContainer, ['@service_container']]

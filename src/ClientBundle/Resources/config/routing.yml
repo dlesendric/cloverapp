@@ -1,0 +1,3 @@
+client:
+    resource: "@ClientBundle/Controller/"
+    type:     annotation

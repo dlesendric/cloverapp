@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="text-center"><b>Client {{ client.name }}</b></div>
+                </div>
+                <p><b>Id:</b> {{ client.id }}</p>
+                <p><b>Name:</b> {{ client.name }}</p>
+                {% if client.contact is defined %}
+                <p><b>Line:</b> {{ client.contact.line }}</p>
+                <p><b>City:</b> {{ client.contact.city }}</p>
+                <p><b>State:</b> {{ client.contact.countryFullName }}</p>
+                <p><b>Phone:</b> {{ client.contact.phone }}</p>
+                {% endif %}
+                <a href="{{ path('client_index') }}" class="btn bnt-default">Back to the list</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_clients_edit', { 'id': client.id }) }}" class="btn btn-primary pull-right">Edit</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

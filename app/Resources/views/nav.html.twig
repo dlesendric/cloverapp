@@ -1,0 +1,14 @@
+<ul class="nav nav-pills">
+        <li role="presentation"class="{% if app.request.attributes.get('_route') starts with 'homepage' %}active{% endif %}"><a href="{{ path('homepage') }}">Home</a></li>
+    {% if app.user %}
+        <li role="presentation"class="{% if app.request.attributes.get('_route') starts with 'client' %}active{% endif %}"><a href="{{ path('client_index') }}">Client</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+        <li role="presentation" class="{% if app.request.attributes.get('_route') starts with 'user' %}active{% endif %}"><a href="{{ path('user_index') }}">Users</a></li>
+        {% endif %}
+        <li role="presentation"><a href="{{ path('logout') }}">Logout</a></li>
+    {% else %}
+        <li role="presentation" class="{% if app.request.attributes.get('_route') starts with 'login' %}active{% endif %}"><a href="{{ path('login') }}">Login</a></li>
+    {% endif %}
+
+
+</ul>

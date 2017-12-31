@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Client list</h1>
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin_clients_new') }}" class="btn btn-default pull-right">Create a new client</a>
+    {% endif %}
+    <table class="table table-stripped table-hover">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for client in pagination.items %}
+            <tr class="row-client-{{ client.id }}">
+                <td><a href="{{ path('client_show', { 'id': client.id }) }}">{{ client.id }}</a></td>
+                <td>{{ client.name }}</td>
+                <td>{% if client.contact is defined %}{{ client.contact.line }} {% endif %}</td>
+                <td>{% if client.contact is defined %}{{ client.contact.phone }} {% endif %}</td>
+
+                <td>
+                    <a href="{{ path('client_show', { 'id': client.id }) }}"><i class="fa fa-eye"></i></a>
+                    {% if is_granted('ROLE_ADMIN') %}
+
+                    <a href="{{ path('admin_clients_edit', { 'id': client.id }) }}"><i class="fa fa-pencil"></i></a>
+
+                    <a href="javascript:void(0)" class="client-remove" data-id="{{ client.id }}" title="Delete"><i class="fa fa-remove"></i></a>
+                    {% endif %}
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if pagination.total/pagination.limit > 1 %}
+        <nav aria-label="">
+            <ul class="pagination">
+                {% if pagination.prev is defined %}
+                    <li><a href="?page={{ pagination.prev }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                {% else %}
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                {% endif %}
+                {% for i in 1..(pagination.total / pagination.limit) %}
+                    <li {% if i == pagination.page %} class="active" {% endif %}><a href="?page={{ i }}"><span aria-hidden="true">{{ i }}</span></a></li>
+                {% endfor %}
+                {% if pagination.next is defined %}
+                    <li><a href="?page={{ pagination.next }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                {% else %}
+                    <li class="disabled"><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" id="csrf">
+{% endblock %}
+
+{% block javascripts %}
+    {% if is_granted('ROLE_ADMIN') %}
+    <script type="text/javascript">
+      var deleteUrl = '{{ path('admin_clients_delete', {'id': '__id__'})|escape('js') }}';
+      (function($){
+        var csrf = $("#csrf").val();
+        $(document).ready(function(){
+          $(".client-remove").on('click', function(e){
+            var id = $(this).data('id');
+            if(confirm("Are you sure? This action can't be undone..")){
+              deleteClient(id);
+            }
+          });
+
+        })
+
+        function deleteClient(id){
+          var url = deleteUrl.replace('__id__', id);
+          console.log(url);
+          $.ajax({
+            url: url,
+            type: 'POST',
+            data:{
+              _token:csrf,
+              _method:'DELETE'
+            }
+          }).then(function(response){
+            $(".row-client-"+id).remove();
+          }).catch(function (err) {
+            console.warn(err);
+          });
+        }
+      })(jQuery)
+    </script>
+
+    {% endif %}
+{% endblock %}
