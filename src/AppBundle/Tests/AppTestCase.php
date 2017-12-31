@@ -70,7 +70,7 @@ class AppTestCase extends WebTestCase
         $purger = new ORMPurger($this->getService('doctrine')->getManager());
         $purger->purge();
     }
-	
+
 
 
     public static function generateRandomString($length = 10)
@@ -103,15 +103,4 @@ class AppTestCase extends WebTestCase
         return $method->invokeArgs($object, $parameters);
     }
 
-    protected function makePOSTRegisterRequest($data)
-    {
-        $this->client->request(
-            'POST',
-            '/user/registration',
-            [],
-            [],
-            ['CONTENT_TYPE' => 'application/json'],
-            json_encode($data)
-        );
-    }
 }
