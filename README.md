@@ -1,6 +1,47 @@
-Symfony Standard Edition
+Symfony Standard Edition + Default common Entities
 ========================
+**This app is good starting point for any standard 3.4 symfony app**
+**It does not include any third party side libraries from Symfony Standarad Edition, but it does have some common solutions exp Soft Delete**
 
+Entities included
+
+**UserBundle** - (Without FOSUserBundle which implementes UserInteface)
+
+**ContactBundle** - (Exp you can add relation to UserBundle)
+
+**ClientBundle** (Exp if you need to create some company and stuf like this)
+
+Standard Service Classes are located in AppBundle
+SoftDelete Filters are located in AppBundle
+
+All twigs are located in theirs bundles, so you can override them in app dir
+
+
+## How to install ##
+
+```bash
+$ composer install
+$ php bin/console doctrine:database:create
+$ php bin/console doctrine:schema:update --force
+```
+
+## How to run ##
+
+```bash
+$ php bin/console server:run
+```
+Open your brownser and go to url : http://localhost:8000
+Register your account
+If you need ROLE_ADMIN or ROLE_SUPER_ADMIN role:
+
+```bash
+$ php bin/console user:promote
+```
+
+
+
+
+## Standrad Symfony Standard Edition Readme ##
 Welcome to the Symfony Standard Edition - a fully-functional Symfony
 application that you can use as the skeleton for your new applications.
 
